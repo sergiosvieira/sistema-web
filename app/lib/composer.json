@@ -1,0 +1,20 @@
+{
+    "name": "ifce/sistema",
+    "description": "Pacote de desenvolvimento",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Sergio Vieira",
+            "email": "sergio.vieira@ifce.edu.br"
+        }
+    ],
+    "autoload": {
+        "psr-4":{
+            "Controllers\\":"../controllers",
+            "Traits\\":"../traits"
+        }
+    },
+    "require": {
+        "coffeecode/router": "1.0.*"
+    }
+}
