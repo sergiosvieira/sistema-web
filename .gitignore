@@ -11,4 +11,4 @@ bower_components
 Thumbs.db
 composer.phar
 /app/lib/vendor/
-
+*.lock
