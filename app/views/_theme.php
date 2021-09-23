@@ -48,7 +48,7 @@
                         <h4 class="text-white">Acesso</h4>
                         <ul class="list-unstyled">
                             <li><a href="<?= url('/login') ?>" class="text-white">Login</a></li>
-                            <li><a href="#" class="text-white">Registre-se</a></li>
+                            <li><a href="<?= url('/register') ?>" class="text-white">Registre-se</a></li>
                         </ul>
                     </div>
 

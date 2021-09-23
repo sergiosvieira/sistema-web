@@ -10,11 +10,16 @@
     ],
     "autoload": {
         "psr-4":{
-            "Controllers\\":"../controllers"
-        }
+            "Controllers\\":"../controllers",
+            "Models\\":"../models"
+        },
+        "files":[
+            "../config/config.php"
+        ]
     },
     "require": {
         "coffeecode/router": "1.0.*",
-        "league/plates": "4.0.0-alpha"
+        "league/plates": "4.0.0-alpha",
+        "coffeecode/datalayer": "^1.1"
     }
 }

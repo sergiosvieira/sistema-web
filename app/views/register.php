@@ -1,13 +1,17 @@
 <?php $v->layout("_theme"); ?>
 
 <script>
-  function show_hidden() {
-    var x = document.getElementById("password");
+  function action(elementName) {
+    var x = document.getElementById(elementName);
     if (x.type === "password") {
       x.type = "text";
     } else {
       x.type = "password";
     }
+  }
+  function show_hide() {
+    action("password");
+    action("repeated-password");
 }
 </script>
 
@@ -21,29 +25,35 @@
 </div>
 <?php endif ?>
 <div id="login">
-    <h3 class="text-center pt-5">Página de Acesso</h3>
+    <h3 class="text-center pt-5">Página de Cadastro de Usuário</h3>
     <div class="container">
       <div id="loginrow" class="row justify-content-center align-items-center">
         <div id="login-column" class="col-md-6">
           <div id="login-box" class="col-md-12">
-            <form id="login-form" class="form" action="<?= $router->route("gerente.login_post") ?>" method="post">
-              <h3 class="text-center">Login</h3>
+            <form id="login-form" class="form" action="<?= $router->route("gerente.register.create") ?>" method="post">
+              <h3 class="text-center">Informações Pessoais</h3>
               <div class="form-group">
                 <label for="username">Nome do usuário:</label><br>
                 <input type="text" name="username" id="username" class="form-control" required>
               </div>
               <div class="form-group">
-                <label for="password" >Senha:</label><br>
-                <input type="password" name="password" id="password" class="form-control" required>                
-                <input  type="checkbox" onclick="show_hidden()"> <label >Exibir Senha</label>
+                <label for="username">E-mail:</label><br>
+                <input type="email" name="email" id="email" class="form-control" required>
               </div>
               <div class="form-group">
-                <label for="remember-me" ><a href="" >Esqueci minha
-                    senha</a></label><br>
+                <label for="password" >Senha:</label><br>
+                <input type="password" name="password" id="password" class="form-control" required>                
+              </div>
+              <div class="form-group">
+                <label for="repeated-password" >Repita a Senha:</label><br>
+                <input type="password" name="repeated-password" id="repeated-password" class="form-control" required>
+                <input  type="checkbox" onclick="show_hide()"> <label >Exibir Senha</label>
+              </div>
+              <div class="form-group">
                 <input type="submit" name="submit" class="btn-primary btn-btn-md" value="Enviar">
               </div>
               <div id="register-link" class="text-right">
-                <a href="<?= url('/register') ?>#" >Registre-se aqui</a>
+                <a href="<?= url('/login') ?>" >Página de Login</a>
               </div>
             </form>
           </div>
