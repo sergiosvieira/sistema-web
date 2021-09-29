@@ -88,9 +88,16 @@
                     <div class="sb-sidenav-footer">
                         <div class="small">Autenticado como:</div>
                         Usuário padrão ou administrador
+                        <?= $v->section("content") ?>
                     </div>
                 </nav>
             </div>
+
+    <!-- Conteúdo Principal -->
+    <main>
+    
+    </main>
+
             <div id="layoutSidenav_content">
 
                 <footer class="py-4 bg-light mt-auto">

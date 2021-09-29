@@ -11,15 +11,23 @@
 }
 </script>
 
-<?php if (isset($message)): 
-  ?>
-<div class="alert alert-danger d-flex align-items-center" role="alert">
-  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-  <div>
-    <?= $message ?>
-  </div>
-</div>
-<?php endif ?>
+<?php
+if (count($message) > 0) {
+  foreach ($message as $arr) {    
+    if (!isset($arr['texto'])) continue;
+    $classe = ($arr["tipo"] == "erro") ? "alert-danger" : "alert-success";
+?>
+    <div class="alert <?= $classe ?> d-flex align-items-center" role="alert">
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+      <div>
+      <?= $arr['texto'] ?>
+      </div>
+    </div>
+<?php
+  }
+}
+?>
+
 <div id="login">
     <h3 class="text-center pt-5">Página de Acesso</h3>
     <div class="container">
