@@ -8,7 +8,8 @@ if (!array_key_exists("session", $_SESSION)) {
     $_SESSION['session'] = [
         "username" => null,
         "userid" => null,
-        "message" => new Stack()
+        "role" => null,
+        "message_stack" => new Stack()
     ];
 }
 
@@ -36,6 +37,17 @@ $router->get("/{errorcode}", "Gerente:erro");
 // Página de Administração
 $router->group("admin");
 $router->get("/", "Administracao:home");
+$router->get("/logout", "Administracao:logout");
+$router->get("/pessoal", "Administracao:pessoal");
+// Administração de Receitas
+$router->get("/receita/form/{id}", "Administracao:receita_formulario", "receita.formulario");
+$router->get("/receita/form", "Administracao:receita_formulario", "receita.formulario");
+$router->get("/receita/table", "Administracao:receita_tabela", "receita.tabela");
+// Receitas CRUD
+$router->post("/receita/criar", "Administracao:receita_criar");
+$router->get("/receita/ler", "Administracao:receita_ler");
+$router->post("/receita/atualizar/{id}", "Administracao:receita_atualizar");
+$router->get("/receita/apagar/{id}", "Administracao:receita_apagar");
 $router->dispatch();
 if ($router->error()) {
     $router->redirect("/errors/{$router->error()}");

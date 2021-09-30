@@ -13,27 +13,37 @@ class Gerente {
         $this->view = Engine::create(CAMINHO_RAIZ . "views", "php");
         $this->router = $router;
         $this->view->addData(["router"=>$router]);
-        $this->session = $_SESSION['session'];
+        $this->session = &$_SESSION['session'];
     }
     private function makeMessages(): array {
         $error_messages = [];
-        while ($this->session["message_stack"]->peek()) {
-            array_push($error_messages, $this->session["message_stack"]->pop());
+        if (isset($this->session["message_stack"])) {        
+            while ($this->session["message_stack"]->peek()) {
+                array_push($error_messages, $this->session["message_stack"]->pop());
+            }
         }
         return $error_messages;
     }
-    public function home(array $data): void {
+    public function home(array $data): void {        
         echo $this->view->render("home", [
             "title" => "Sistema de Receitas do IFCE"
         ]);
     }
-    public function login(array $data): void {        
+    private function redireciona_se_logado() {
+        if (isset($_SESSION['session']) 
+            && $_SESSION['session']['username'] != null) {
+            $this->router->redirect("/admin");
+        }
+    }
+    public function login(array $data): void {
+        $this->redireciona_se_logado();
         echo $this->view->render("login", [
             "title" => "Página de Login do Sistema de Receitas",
             "message" => $this->makeMessages()
         ]);
     }
     public function login_post(array $data): void {
+        $this->redireciona_se_logado();
         filter_var_array($data, FILTER_SANITIZE_STRING);
         if (array_key_exists("username", $data)
             && array_key_exists("password", $data)) {
@@ -48,6 +58,7 @@ class Gerente {
             if ($user && password_verify($pass, $user->password)) {
                 $this->session['userid'] = $user->id;
                 $this->session['username'] = $user->username;
+                $this->session['role'] = $user->role;
                 $this->router->redirect("admin");
             } else {
                 $this->session['message_stack']
@@ -60,12 +71,14 @@ class Gerente {
         }
     }
     public function register(array $data): void {
+        $this->redireciona_se_logado();
         echo $this->view->render("register", [
             "title" => "Cadastro de Usuário",
             "message" => $this->makeMessages()
         ]);
     }
     public function register_create(array $data): void {
+        $this->redireciona_se_logado();
         filter_var_array($data, FILTER_SANITIZE_STRING);
         $pass_match = ($data['password'] == $data['repeated-password']);
         if (!$pass_match) {

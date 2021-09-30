@@ -28,15 +28,15 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Informações Pessoais</a></li>
+                        <li><a class="dropdown-item" href="<?= url('admin/pessoal') ?>">Informações Pessoais</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="<?= url('admin/logout') ?>">Logout</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
+        <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
@@ -54,8 +54,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Adicionar Nova</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Listar todas</a>
+                                    <a class="nav-link" href="<?= url('admin/receita/form') ?>">Adicionar Nova</a>
+                                    <a class="nav-link" href="<?= url('admin/receita/table') ?>">Listar todas</a>
                                 </nav>
                             </div>
                             <!-- Comentários -->
@@ -66,7 +66,7 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-sidenav-light.html">Listar todos</a>
+                                    <a class="nav-link" href="<?= url('comentarios/table') ?>">Listar todos</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Elementos do Administrador</div>
@@ -78,8 +78,8 @@
                             </a>
                             <div class="collapse" id="collapseUsers" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Adicionar Novo</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Listar todos</a>
+                                    <a class="nav-link" href="<?= url('usuarios/form') ?>">Adicionar Novo</a>
+                                    <a class="nav-link" href="<?= url('usuarios/table') ?>">Listar todos</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Elementos do Administrador</div>
@@ -87,19 +87,20 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Autenticado como:</div>
-                        Usuário padrão ou administrador
-                        <?= $v->section("content") ?>
+                        <?= $username ?>                        
                     </div>
                 </nav>
             </div>
-
-    <!-- Conteúdo Principal -->
-    <main>
-    
-    </main>
-
-            <div id="layoutSidenav_content">
-
+            <div id="layoutSidenav_content">            
+                <!-- Conteúdo Principal -->                
+                <main>                
+                <div class="container-fluid px-5">
+                        <h1 class="mt-4"><?= $title ?></h1>
+                        <div class="card mb-4">
+                            <?= $v->section("content") ?>
+                        </div>
+                    </div>                
+                </main>            
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
